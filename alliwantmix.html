@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>all i want mix takip</title>
+    <link rel="icon" type="image/x-icon" href="img/xdmod.ico">
+    <style>
+        @font-face {
+            font-family: comic_bland;
+            src: url(comicbland.ttf);
+        }
+        body {
+            background-color: rgb(239, 239, 239);
+        }
+
+        header {
+          padding: 4px;
+          background-color: black;
+          color: white;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+        }
+        header:hover {
+            color: black;
+            background: url(img/rand.gif);
+            background-repeat: no-repeat;
+            background-size: 300%;
+        }
+        header a {
+            color: lightgray;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        header a:hover {
+            color: black;
+        }
+        header a:visited {
+            color: #008200
+        }
+
+        .TIREDNERVOUSANDBROKE {
+            display: flex;
+            justify-content: center;
+        }
+        .steppapig {
+            padding: 12px;
+            margin: 12px;
+            background-color: rgb(255, 82, 82);
+            border-radius: 24px;
+        }
+        .myeyes {
+            background-color: rgb(24, 24, 24);
+            color: white;
+            margin: 24px;
+            padding: 24px;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        .booman {
+            font-size: 86px;
+        }
+        @media only screen and (max-width: 550px) {
+            .booman {
+                font-size: 44px;
+            }
+        }
+        .runtheymouth {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 6px
+        }
+
+        a {
+            color: white;
+        }
+        a:hover {
+            color: darkgray;
+        }
+        a:visited {
+            color: aqua;
+        }
+    </style>
+    <script>
+        function loadData() {
+            const time = document.getElementById("time");
+            const albuminfo = document.getElementById("la_album");
+            const aiwmibfo = document.getElementById("aiwm_info");
+            const extrainf = document.getElementById("extra");
+
+            fetch('./img/alliwantmix.json')
+                .then(response => response.json())
+                .then(data => {
+                  time.innerHTML = calcTime(data["time"]);
+
+                  let lastadded_x = data["lastalbum"];
+                  albuminfo.innerHTML = "Son Eklenen Albüm: " + lastadded_x
+
+                  let trackcount = data["track_count"];
+                  let albumcount = data["album_count"];
+                  let albuminfo_x = "Şarkı Sayısı: " + String(trackcount) + " | Albüm Sayısı: " + String(albumcount);
+                  aiwmibfo.innerHTML = albuminfo_x;
+
+                  extrainf.innerHTML = data["extra_tr"]
+                })
+                .catch(error => console.error(error));
+        }
+
+        function calcTime(seconds) {
+            var sec_lo = seconds % 60;
+
+            var minutes = Math.floor((seconds-sec_lo) / 60);
+            var min_lo = minutes % 60;
+
+            var hours = Math.floor((minutes-min_lo) / 60)
+
+            var days = Math.floor(hours/24)
+
+            return String(hours) + " Saat (" + String(days) + " Gün), " + String(min_lo) + " Dakika, " + String(sec_lo) + " Saniye";
+        }
+    </script>
+</head>
+<body onload="loadData()">
+    <header style="font-family: comic_bland;">
+        <img src="img/all.jpg" alt="all i want mix" width="30px" height="30px">
+        <a href="index.html"><p>&lt;- Geri Dön</p></a>
+    </header>
+
+    <div class="TIREDNERVOUSANDBROKE">
+        <div class="steppapig">
+            <div class="myeyes">
+                <span class="booman" id="time"></span>
+                <div class="runtheymouth">
+                    <p id="la_album"></p>
+                    <img src="img/lastalbum.png" alt="albüm fotoğrafı" width="40px" height="40px">
+                </div>
+                <p id="aiwm_info"></p>
+                <p>(Canlı değil, ben kendim editleyerek değişiyor)</p>
+                <p id="extra">Extra Bilgi: </p>
+                <br>
+                <div class="runtheymouth">
+                    <p>all i want mix'i dinleyin (dinlemeyin)</p>
+                    <img src="img/all.jpg" alt="all i want mix" width="40px" height="40px">
+                </div>
+                <div class="runtheymouth">
+                    <a href="https://www.youtube.com/playlist?list=PL8ISZ5CxgVDAZGjVQ9k1aVWmRZvD4fNUh" target="_blank">Youtube</a>
+                    <img src="img/yt.png" alt="youtube" width="40px">
+                    <a href="https://music.youtube.com/playlist?list=PL8ISZ5CxgVDAZGjVQ9k1aVWmRZvD4fNUh" target="_blank">Youtube</a>
+                    <img src="img/ytm.png" alt="youtube music" width="40px">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
